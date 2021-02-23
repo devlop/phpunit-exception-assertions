@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Devlop\PHPUnit;
 
+use PHPUnit\Framework\Assert;
 use Throwable;
 
 trait ExceptionAssertions
@@ -16,7 +17,7 @@ trait ExceptionAssertions
      * @param  callable  $callback
      * @return void
      */
-    public function assertExceptionThrown(string $expectedException, callable $callback, ?callable $validator = null) : Throwable
+    public static function assertExceptionThrown(string $expectedException, callable $callback, ?callable $validator = null) : void
     {
         $thrownException = null;
 
@@ -26,7 +27,7 @@ trait ExceptionAssertions
             $thrownException = $e;
         }
 
-        $this->assertInstanceOf(
+        Assert::assertInstanceOf(
             $expectedException,
             $thrownException,
             $thrownException === null
@@ -41,8 +42,6 @@ trait ExceptionAssertions
         if ($validator !== null) {
             $validator($thrownException);
         }
-
-        return $thrownException;
     }
 
     /**
@@ -54,7 +53,7 @@ trait ExceptionAssertions
      * @param  callable  $callback
      * @return void
      */
-    public function assertExceptionNotThrown(string $expectedException, callable $callback) : void
+    public static function assertExceptionNotThrown(string $expectedException, callable $callback) : void
     {
         $thrownException = null;
 
@@ -64,7 +63,7 @@ trait ExceptionAssertions
             $thrownException = $e;
         }
 
-        $this->assertNotInstanceOf(
+        Assert::assertNotInstanceOf(
             $expectedException,
             $thrownException,
             \sprintf(
@@ -80,7 +79,7 @@ trait ExceptionAssertions
      * @param  callable  $callback
      * @return void
      */
-    public function assertNoExceptionsThrown(callable $callback) : void
+    public static function assertNoExceptionsThrown(callable $callback) : void
     {
         $thrownException = null;
 
@@ -90,7 +89,7 @@ trait ExceptionAssertions
             $thrownException = $e;
         }
 
-        $this->assertNull(
+        Assert::assertNull(
             $thrownException,
             \sprintf(
                 'Failed asserting that no exceptions was thrown, exception of type "%1$s was thrown.',

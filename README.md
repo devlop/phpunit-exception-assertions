@@ -41,6 +41,21 @@ $this->assertExceptionThrown(\InvalidArgumentException::class, function () : voi
 });
 ```
 
+## assertExceptionNotThrown
+
+Asserts that a specific exception was not thrown during the execution of the callback,
+if the specified exception was thrown during execution the assertion fails.
+
+**use with caution** - this will only assert that a specific exception was not thrown and
+the assertion will pass for any other exceptions thrown, intentional or accidental.
+In most cases it is probably better to `assertNoExceptionsThrown` instead.
+
+```php
+$this->assertExceptionNotThrown(\InvalidArgumentException::class, function () : void {
+    // code that should not throw the exception
+});
+```
+
 ## assertNoExceptionsThrown
 
 Asserts that no exceptions was thrown during the execution of the callback,
@@ -49,19 +64,5 @@ if any exceptions was thrown during the execution the assertion fails.
 ```php
 $this->assertNoExceptionsThrown(function () : void {
     // code that should not throw any exceptions
-});
-```
-
-## assertExceptionNotThrown
-
-Asserts that a specific exception was not thrown during the execution of the callback,
-if the specified exception was thrown during execution the assertion fails.
-
-**use with caution** - this will only assert that a specific exception was not thrown and
-the assertion will pass for any other exceptions thrown, intentional or accidental.
-
-```php
-$this->assertExceptionNotThrown(\InvalidArgumentException::class, function () : void {
-    // code that should not throw the exception
 });
 ```

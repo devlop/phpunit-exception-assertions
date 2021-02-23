@@ -13,9 +13,17 @@
         "php": "^7.4|^8.0",
         "phpunit/phpunit": "^9.5"
     },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
+    },
     "autoload": {
         "psr-4": {
             "Devlop\\PHPUnit\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Devlop\\Buffer\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
