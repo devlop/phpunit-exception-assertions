@@ -94,7 +94,9 @@ trait ExceptionAssertions
             $thrownException,
             \sprintf(
                 'Failed asserting that no exceptions was thrown, exception of type "%1$s was thrown.',
-                \get_class($thrownException),
+                $thrownException === null
+                    ? 'N/A'
+                    : \get_class($thrownException),
             ),
         );
     }
